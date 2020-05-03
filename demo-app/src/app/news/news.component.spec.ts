@@ -11,13 +11,15 @@ import { of } from 'rxjs/internal/observable/of';
 import { News } from '../models/news.model';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
+import { BackendService } from 'angular-in-memory-web-api';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
   let fixture: ComponentFixture<NewsComponent>;
-  let dialogSpy: jasmine.Spy;
-  let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
-  dialogRefSpyObj.componentInstance = { body: '' };
+  let backend: HttpTestingController;
+  //let dialogSpy: jasmine.Spy;
+  //let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
+  //dialogRefSpyObj.componentInstance = { body: '' };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,7 +33,7 @@ describe('NewsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;
-    dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
+    //dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
 
@@ -39,9 +41,13 @@ describe('NewsComponent', () => {
     httpMock.verify();
   }));
 
-  /* it('should create', () => {
-    expect(component).toBeTruthy();
-  }); */
+  it('should create', inject ([HttpTestingController],
+    (httpMock: HttpTestingController) => {
+      const mockRequest = httpMock.expectOne(`api/news`);
+      expect(mockRequest.request.method).toEqual('GET');
+      expect(component).toBeTruthy();
+     })
+   );
 
   /* it('should use the news from the data service', () => {
      const app = fixture.debugElement.componentInstance;

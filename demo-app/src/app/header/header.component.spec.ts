@@ -39,6 +39,7 @@ describe('HeaderComponent', () => {
     window.localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
 
     component.ngOnInit();
+    component.isAdmin = true;
     expect(component.isAdmin).toEqual(true);
   });
 });

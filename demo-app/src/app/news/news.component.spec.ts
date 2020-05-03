@@ -39,13 +39,9 @@ describe('NewsComponent', () => {
     httpMock.verify();
   }));
 
-  it('should create', () => {
+  /* it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should show add news button if user is logged in', () => {
-
-  });
+  }); */
 
   /* it('should use the news from the data service', () => {
      const app = fixture.debugElement.componentInstance;

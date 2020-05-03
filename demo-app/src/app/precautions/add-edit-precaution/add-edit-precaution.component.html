@@ -1,0 +1,13 @@
+<div style="width: 40vw;">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>{{data.mode === 'add' ? 'Add New Precaution' : 'Edit Precaution'}}</mat-label>
+      <input matInput placeholder="Ex. Sanitize your hands" [formControl]="precaution">
+    </mat-form-field>
+  </div>
+  <div align="right">
+    <button mat-raised-button color="primary" [disabled]="!precaution.valid"
+      (click)="precautionOps(precaution.value)">{{data.mode === 'add' ? 'Add Precaution' : 'Update Precaution'}}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div align="right" style="margin-bottom: 2%;" *ngIf="isAdmin">
+  <button mat-raised-button (click)="onAddNews()" color="primary"> Add News</button>
+</div>
+<div *ngIf="news?.length>0" class="card" style="overflow-y: auto; max-height: 74vh;">
+  <mat-card *ngFor="let newsItem of news" style="margin-top: 2%;">
+    <div style="display: flex;justify-content: space-between;">
+      <mat-card-title>{{newsItem.title}}</mat-card-title>
+      <mat-card-subtitle style="margin-top: 1%;">{{newsItem.date | date:'mediumDate'}}</mat-card-subtitle>
+    </div>
+    <mat-card-content>
+      <p>
+        {{newsItem.description}}
+      </p>
+      <hr>
+      <a [href]="newsItem.url" target="_blank">{{newsItem.url}}</a>
+    </mat-card-content>
+    <mat-card-actions align="center" *ngIf="isAdmin">
+      <button mat-button color="primary" (click)="onEditNews(newsItem.id)">Edit</button>
+      <button mat-button color="primary" (click)="onDeleteNews(newsItem.id)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<h2 *ngIf="news?.length==0">No News !</h2>

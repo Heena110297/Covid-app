@@ -1,0 +1,29 @@
+<div style="width: 20vw;">
+    <div mat-dialog-title style="display: flex; justify-content: space-between;">
+        <div style="font-weight: 500; font-size: 18pt; font-family: 'Rubik', sans-serif;">Login</div>
+        <span class="material-icons" [mat-dialog-close]="true" style="cursor: pointer; margin-top: 1%;">
+            close
+        </span>
+    </div>
+    <div>
+        <form [formGroup]='loginForm' (ngSubmit)=login()>
+            <mat-grid-list cols="1" rowHeight="80px">
+                <mat-grid-tile [colspan]="1">
+                    <mat-form-field appearance="standard">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" type="email" formControlName="email" required>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1">
+                    <mat-form-field appearance="standard">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" type="password" formControlName="password" required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div align="center">
+                <button mat-raised-button color="primary" type="submit" [disabled]='!loginForm.valid'>Login</button>
+            </div>
+        </form>
+    </div>
+</div>

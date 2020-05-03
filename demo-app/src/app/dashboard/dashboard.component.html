@@ -1,0 +1,52 @@
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+</mat-form-field>
+
+<div class="mat-elevation-z8 content">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-button (click)="openDialog(row)" color="primary">{{row?.state}}
+                </button>
+            </td>
+            <td style="padding-left:4%" mat-footer-cell *matFooterCellDef><b>{{total?.state}}</b> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+            <td mat-cell *matCellDef="let row"> {{row?.confirmed}} </td>
+            <td mat-footer-cell *matFooterCellDef><b> {{total?.confirmed}}</b> </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="reported">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Reported </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container> -->
+
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+            <td mat-cell *matCellDef="let row"> {{row?.active}} </td>
+            <td mat-footer-cell *matFooterCellDef> <b>{{total?.active}}</b> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recovered">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Recovered </th>
+            <td mat-cell *matCellDef="let row"> {{row?.recovered}} </td>
+            <td mat-footer-cell *matFooterCellDef><b>{{total?.recovered}}</b> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deceased">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Deceased </th>
+            <td mat-cell *matCellDef="let row"> {{row?.deaths}} </td>
+            <td mat-footer-cell *matFooterCellDef> <b>{{total?.deaths}}</b> </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns;sticky: true"></tr>
+
+    </table>
+</div>

@@ -1,0 +1,22 @@
+<div align="right" style="margin-bottom: 2%;" *ngIf="isAdmin">
+  <button mat-raised-button (click)="openPrecautionForm()" color="primary"> Add Precautions</button>
+</div>
+<div *ngIf="precautions.length>0" class="row" style="overflow-y: auto; max-height: 74vh;">
+  <div class="col-xs-16 col-sm-12">
+    <div class="list-group">
+      <a class="list-group-item" *ngFor="let precaution of precautions"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1%;">
+        {{ precaution.precaution }}
+        <div *ngIf="isAdmin">
+          <button mat-icon-button color="primary" (click)="editPrecaution(precaution)">
+            <mat-icon class="mat-24">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="deletePrecaution(precaution.id)">
+            <mat-icon class="mat-24">delete</mat-icon>
+          </button>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<h2 *ngIf="precautions.length==0">No Precautions !</h2>

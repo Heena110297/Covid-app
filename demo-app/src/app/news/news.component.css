@@ -1,0 +1,8 @@
+.card {
+  width: 100%;
+}
+
+.card mat-card {
+  border: 1px solid #414D55;
+  border-radius: 10px;
+}

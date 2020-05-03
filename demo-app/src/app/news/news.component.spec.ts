@@ -7,16 +7,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { OVERLAY_PROVIDERS } from '@angular/cdk/overlay';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs/internal/observable/of';
-import { News } from '../models/news.model';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
-import { BackendService } from 'angular-in-memory-web-api';
+import { News } from '../models/news.model';
+;
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
   let fixture: ComponentFixture<NewsComponent>;
-  let backend: HttpTestingController;
+  let httpMock: HttpTestingController;
   //let dialogSpy: jasmine.Spy;
   //let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
   //dialogRefSpyObj.componentInstance = { body: '' };
@@ -37,26 +36,29 @@ describe('NewsComponent', () => {
     fixture.detectChanges();
   });
 
-  afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
+  /* afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     httpMock.verify();
-  }));
+  })); */
 
   it('should create', inject ([HttpTestingController],
     (httpMock: HttpTestingController) => {
       const mockRequest = httpMock.expectOne(`api/news`);
       expect(mockRequest.request.method).toEqual('GET');
+      mockRequest.flush(null, { status: 200, statusText: 'Ok' });
       expect(component).toBeTruthy();
      })
    );
 
-  /* it('should use the news from the data service', () => {
-     const app = fixture.debugElement.componentInstance;
+  /* it('should use the 2 news arrays from the data service', () => {
      const dataService = fixture.debugElement.injector.get(DataService);
-     const latestNews: News = {id: 1, title: 'COVID NEWS', description: 'The situation is getting better in India', url: 'https://www.livemint.com/news/india/coronavirus-update-covid-19-cases-in-india-cross-35-000-death-toll-at-1-147-state-wise-tally-11588301509527.html', date: new Date()};
-     app.news = latestNews;
-     dataService.getNews().subscribe((receivedNews: News) => expect(receivedNews).toBe(latestNews));
+     let latestNews: News[];
+     dataService.getNews().subscribe((receivedNews: News[]) => {
+       latestNews = receivedNews;
+      });
+     expect(latestNews.length).toBe(2);
     });
-
+ */
+/*
   it('expects service to fetch data',
   inject([HttpTestingController, DataService],
     (httpMock: HttpTestingController, service: DataService) => {
